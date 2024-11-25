@@ -77,22 +77,22 @@ const comprobarPartida = () => {
   }
 };
 
-const plantarse = () => { 
-if (puntuacion < 4) {
+const plantarse = () => {
+  if (puntuacion < 4) {
     console.log("Has sido muy conservador");
-}
+  }
 
-if (puntuacion 5) {
-  console.log("Te ha entrado el canguelo eh?");
-}
+  if ((puntuacion = 5)) {
+    console.log("Te ha entrado el canguelo eh?");
+  }
 
-if (puntuacion 6 || 7) {
-  console.log("Casi, casi...");
-}
+  if (((puntuacion = 6), 7)) {
+    console.log("Casi, casi...");
+  }
 
-if (puntuacion 7.5) {
-  console.log("Lo has clavado");
-}
+  if ((puntuacion = 7.5)) {
+    console.log("Lo has clavado");
+  }
 };
 
 const dameCarta = () => {
@@ -123,7 +123,7 @@ const mePlantoBoton = document.getElementById("mePlanto");
 if (
   mePlantoBoton !== null &&
   mePlantoBoton !== undefined &&
-  mePlantoBoton instanceof HTMLButtonElement 
+  mePlantoBoton instanceof HTMLButtonElement
 ) {
   mePlantoBoton.addEventListener("click", () => {
     plantarse();
