@@ -1,9 +1,12 @@
+// Variables globales
 let puntuacion: number = 0;
 
+// Función para generar un numero aleatorio
 const dameNumeroAleatorio = () => {
   return Math.floor(Math.random() * 10);
 };
 
+// Función para generar una carta aleatoria
 const dameNumeroCarta = (numeroAleatorio: number) => {
   if (numeroAleatorio > 7) {
     return numeroAleatorio + 2;
@@ -12,6 +15,7 @@ const dameNumeroCarta = (numeroAleatorio: number) => {
   return numeroAleatorio;
 };
 
+// Función para mostrar la carta
 const dameUrlCarta = (numeroCarta: number) => {
   switch (numeroCarta) {
     case 1:
@@ -39,6 +43,7 @@ const dameUrlCarta = (numeroCarta: number) => {
   }
 };
 
+// Función para pintar la carta
 const pintarUrlCarta = (urlCarta: string) => {
   const imgElement = document.getElementById("cartaActual");
 
@@ -51,6 +56,7 @@ const pintarUrlCarta = (urlCarta: string) => {
   }
 };
 
+// Función para dar valor a la carta
 const damePuntosCarta = (carta: number) => {
   if (carta > 7) {
     return 0.5;
@@ -59,14 +65,17 @@ const damePuntosCarta = (carta: number) => {
   return carta;
 };
 
+//Función para sumar puntuacion total
 const sumarPuntos = (puntos: number) => {
   return puntos + puntuacion;
 };
 
+//Función para actualizar marcador
 const actualizarPuntuacion = (puntosActuales: number) => {
   puntuacion = puntosActuales;
 };
 
+//Función para estatus de partida
 const comprobarPartida = () => {
   if (puntuacion === 7.5) {
     console.log("Has ganado");
@@ -77,6 +86,7 @@ const comprobarPartida = () => {
   }
 };
 
+// Función para estatus de plantarse
 const plantarse = () => {
   if (puntuacion < 4) {
     console.log("Has sido muy conservador");
@@ -95,6 +105,7 @@ const plantarse = () => {
   }
 };
 
+//Función principal
 const dameCarta = () => {
   const aleatorio = dameNumeroAleatorio();
   const carta = dameNumeroCarta(aleatorio);
@@ -106,6 +117,7 @@ const dameCarta = () => {
   comprobarPartida();
 };
 
+// Función boton PEDIR CARTA
 const nuevaCartaBoton = document.getElementById("nuevaCarta");
 
 if (
@@ -118,6 +130,7 @@ if (
   });
 }
 
+//Función boton ME PLANTO
 const mePlantoBoton = document.getElementById("mePlanto");
 
 if (
