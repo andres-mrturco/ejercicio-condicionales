@@ -1,12 +1,12 @@
 // Variables globales
 let puntuacion: number = 0;
 
-// Función para generar un numero aleatorio
+// Función generar numero aleatorio
 const dameNumeroAleatorio = () => {
   return Math.floor(Math.random() * 10) + 1;
 };
 
-// Función para generar una carta aleatoria
+// Función carta aleatoria
 const dameNumeroCarta = (numeroAleatorio: number) => {
   if (numeroAleatorio > 7) {
     return (numeroAleatorio += 2);
@@ -14,7 +14,15 @@ const dameNumeroCarta = (numeroAleatorio: number) => {
   return numeroAleatorio;
 };
 
-// Función para mostrar la carta
+// Función valor carta
+const damePuntosCarta = (carta: number) => {
+  if (carta > 7) {
+    return 0.5;
+  }
+  return carta;
+};
+
+// Función mostrar carta
 const dameUrlCarta = (numeroCarta: number) => {
   switch (numeroCarta) {
     case 1:
@@ -42,7 +50,7 @@ const dameUrlCarta = (numeroCarta: number) => {
   }
 };
 
-// Función para pintar carta
+// Función pintar carta
 const pintarUrlCarta = (urlCarta: string) => {
   const imgElement = document.getElementById("cartaActual");
   if (
@@ -54,7 +62,7 @@ const pintarUrlCarta = (urlCarta: string) => {
   }
 };
 
-// Función para pintar carta especial
+// **Función pintar carta especial**
 const mostrarCartaEspecial = (tipo: string) => {
   const imgElement = document.getElementById("cartaActual");
 
@@ -77,20 +85,24 @@ const mostrarCartaEspecial = (tipo: string) => {
   }
 };
 
-// Función para dar valor a la carta
-const damePuntosCarta = (carta: number) => {
-  if (carta > 7) {
-    return 0.5;
+// Función pintar el mensaje
+const pintarMensaje = (mensaje: string) => {
+  const mensajeElemento = document.getElementById("mensaje");
+  if (
+    mensajeElemento !== null &&
+    mensajeElemento !== undefined &&
+    mensajeElemento instanceof HTMLElement
+  ) {
+    mensajeElemento.textContent = mensaje;
   }
-  return carta;
 };
 
-// Función para sumar puntuación total
+// Función sumar puntuación total
 const sumarPuntos = (puntos: number) => {
   puntuacion += puntos;
 };
 
-// Función para actualizar puntuación
+// Función actualizar puntuación
 const actualizarPuntuacion = () => {
   const puntuacionElemento = document.getElementById("puntuacion");
   if (
@@ -102,7 +114,7 @@ const actualizarPuntuacion = () => {
   }
 };
 
-// Función comprobar estatus del juego
+// Función comprobar partida
 const comprobarPartida = () => {
   const mensajeElemento = document.getElementById("mensaje");
   if (
@@ -111,7 +123,7 @@ const comprobarPartida = () => {
     mensajeElemento instanceof HTMLElement
   ) {
     if (puntuacion === 7.5) {
-      mensajeElemento.textContent = "¡Has ganado! ¡Felicidades!";
+      pintarMensaje("¡Has ganado! ¡Felicidades!");
       mostrarCartaEspecial("ganado");
       deshabilitarBotones();
 
@@ -121,18 +133,29 @@ const comprobarPartida = () => {
         oraculoBoton !== undefined &&
         oraculoBoton instanceof HTMLButtonElement
       ) {
+        oraculoBoton.style.display = "none";
         oraculoBoton.disabled = true;
       }
     }
     if (puntuacion > 7.5) {
-      mensajeElemento.textContent = "¡Has perdido! Te pasaste de 7.5 puntos.";
+      pintarMensaje("¡Has perdido! Te pasaste de 7.5 puntos.");
       mostrarCartaEspecial("perdido");
       deshabilitarBotones();
+
+      const oraculoBoton = document.getElementById("oraculo");
+      if (
+        oraculoBoton !== null &&
+        oraculoBoton !== undefined &&
+        oraculoBoton instanceof HTMLButtonElement
+      ) {
+        oraculoBoton.style.display = "none";
+        oraculoBoton.disabled = true;
+      }
     }
   }
 };
 
-// Función para estatus de plantarse
+// Función estatus plantarse
 const plantarse = () => {
   const mensajeElemento = document.getElementById("mensaje");
   if (
@@ -140,17 +163,20 @@ const plantarse = () => {
     mensajeElemento !== undefined &&
     mensajeElemento instanceof HTMLElement
   ) {
-    if (puntuacion <= 4) {
-      mensajeElemento.textContent = "Has sido muy conservador";
+    if (puntuacion < 2) {
+      pintarMensaje("No me hagas reir");
+    }
+    if (puntuacion >= 2 && puntuacion < 5) {
+      pintarMensaje("Has sido muy conservador");
     }
     if (puntuacion >= 5 && puntuacion < 6) {
-      mensajeElemento.textContent = "Te ha entrado el canguelo eh?";
+      pintarMensaje("Te ha entrado el canguelo eh?");
     }
-    if (puntuacion >= 6 && puntuacion < 7) {
-      mensajeElemento.textContent = "Casi, casi...";
+    if (puntuacion >= 6 && puntuacion <= 7) {
+      pintarMensaje("Casi, casi...");
     }
     if (puntuacion === 7.5) {
-      mensajeElemento.textContent = "¡Lo has clavado!";
+      pintarMensaje("¡Lo has clavado!");
     }
 
     const oraculoBoton = document.getElementById("oraculo");
@@ -160,12 +186,13 @@ const plantarse = () => {
       oraculoBoton instanceof HTMLButtonElement
     ) {
       oraculoBoton.style.display = "inline-block";
+      oraculoBoton.disabled = false;
     }
     deshabilitarBotones();
   }
 };
 
-// Función para reiniciar la partida
+// Función reiniciar partida
 const reiniciarPartida = () => {
   puntuacion = 0;
   actualizarPuntuacion();
@@ -183,7 +210,7 @@ const reiniciarPartida = () => {
     mensajeElemento !== undefined &&
     mensajeElemento instanceof HTMLElement
   ) {
-    mensajeElemento.textContent = "¡Empieza una nueva partida!";
+    pintarMensaje("¡Empieza una nueva partida!");
   }
   const nuevaCartaBoton = document.getElementById("nuevaCarta");
   const mePlantoBoton = document.getElementById("mePlanto");
@@ -207,15 +234,22 @@ const reiniciarPartida = () => {
   ) {
     nuevaPartidaBoton.disabled = true;
   }
+
+  const oraculoBoton = document.getElementById("oraculo");
+  if (
+    oraculoBoton !== null &&
+    oraculoBoton !== undefined &&
+    oraculoBoton instanceof HTMLButtonElement
+  ) {
+    oraculoBoton.style.display = "none";
+    oraculoBoton.disabled = true;
+  }
 };
 
-// Función Oráculo
+// **Función Oráculo**
 const oraculo = () => {
-  let mensajeSimulado = "El Oráculo te revela el siguiente paso...\n";
-
   if (puntuacion > 7.5) {
-    mensajeSimulado =
-      "Tu futuro no tiene solución... ¡Que le corten la cabeza!";
+    pintarMensaje("Tu futuro no tiene solución... ¡Que le corten la cabeza!");
     mostrarCartaEspecial("perdido");
   } else {
     const aleatorio = dameNumeroAleatorio();
@@ -224,22 +258,19 @@ const oraculo = () => {
     const nuevaPuntuacion = puntuacion + puntosCarta;
 
     if (nuevaPuntuacion > 7.5) {
-      mensajeSimulado += `sacarías una carta de valor ${carta}, tu puntuación sería: ${nuevaPuntuacion}. ¡Buena intuición!`;
+      pintarMensaje(
+        `En tu futuro hay un ${carta}, tu puntuación sería: ${nuevaPuntuacion}. ¡Buena intuición!`
+      );
     } else if (nuevaPuntuacion === 7.5) {
-      mensajeSimulado += `sacarías una carta de valor ${carta}, tu puntuación sería: ${nuevaPuntuacion}. ¡Lo habrías clavado!`;
-    } else {
-      mensajeSimulado += `sacarías una carta de valor ${carta}, tu puntuación sería: ${nuevaPuntuacion}. ¡Eres un cobarde!`;
+      pintarMensaje(
+        `En tu futuro hay un ${carta}, tu puntuación sería: ${nuevaPuntuacion}. ¡Lo habrías clavado!`
+      );
+    } else if (nuevaPuntuacion < 7.5) {
+      pintarMensaje(
+        `En tu futuro hay un ${carta}, tu puntuación sería: ${nuevaPuntuacion}. ¡Eres un cobarde!`
+      );
     }
     mostrarCartaEspecial("oraculo");
-  }
-
-  const mensajeElemento = document.getElementById("mensaje");
-  if (
-    mensajeElemento !== null &&
-    mensajeElemento !== undefined &&
-    mensajeElemento instanceof HTMLElement
-  ) {
-    mensajeElemento.textContent = mensajeSimulado;
   }
 };
 
@@ -252,10 +283,39 @@ const dameCarta = () => {
   const puntosCarta = damePuntosCarta(carta);
   sumarPuntos(puntosCarta);
   actualizarPuntuacion();
+  pintarMensaje("Prueba tu suerte");
   comprobarPartida();
 };
 
-// Función botón PEDIR CARTA
+//Función habilitar botones
+const deshabilitarBotones = () => {
+  const nuevaCartaBoton = document.getElementById("nuevaCarta");
+  const mePlantoBoton = document.getElementById("mePlanto");
+
+  if (
+    nuevaCartaBoton !== null &&
+    nuevaCartaBoton !== undefined &&
+    nuevaCartaBoton instanceof HTMLButtonElement &&
+    mePlantoBoton !== null &&
+    mePlantoBoton !== undefined &&
+    mePlantoBoton instanceof HTMLButtonElement
+    // Porqué da error poner "nuevaCartaBoton && mePlantoBoton" y tengo que ponerlos separados?
+  ) {
+    nuevaCartaBoton.disabled = true;
+    mePlantoBoton.disabled = true;
+  }
+
+  const nuevaPartidaBoton = document.getElementById("nuevaPartida");
+  if (
+    nuevaPartidaBoton !== null &&
+    nuevaPartidaBoton !== undefined &&
+    nuevaPartidaBoton instanceof HTMLButtonElement
+  ) {
+    nuevaPartidaBoton.disabled = false;
+  }
+};
+
+// Función botón NUEVA CARTA
 const nuevaCartaBoton = document.getElementById("nuevaCarta");
 if (
   nuevaCartaBoton !== null &&
@@ -279,7 +339,7 @@ if (
   });
 }
 
-// Función de botón NUEVA PARTIDA
+// Función botón NUEVA PARTIDA
 const nuevaPartidaBoton = document.getElementById("nuevaPartida");
 if (
   nuevaPartidaBoton !== null &&
@@ -291,40 +351,15 @@ if (
   });
 }
 
-// Función botón ORÁCULO
+// **Función botón ORÁCULO**
 const oraculoBoton = document.getElementById("oraculo");
 if (
   oraculoBoton !== null &&
   oraculoBoton !== undefined &&
   oraculoBoton instanceof HTMLButtonElement
 ) {
+  oraculoBoton.style.display = "none";
   oraculoBoton.addEventListener("click", () => {
     oraculo();
   });
 }
-
-const deshabilitarBotones = () => {
-  const nuevaCartaBoton = document.getElementById("nuevaCarta");
-  const mePlantoBoton = document.getElementById("mePlanto");
-
-  if (
-    nuevaCartaBoton !== null &&
-    nuevaCartaBoton !== undefined &&
-    nuevaCartaBoton instanceof HTMLButtonElement &&
-    mePlantoBoton !== null &&
-    mePlantoBoton !== undefined &&
-    mePlantoBoton instanceof HTMLButtonElement
-  ) {
-    nuevaCartaBoton.disabled = true;
-    mePlantoBoton.disabled = true;
-  }
-
-  const nuevaPartidaBoton = document.getElementById("nuevaPartida");
-  if (
-    nuevaPartidaBoton !== null &&
-    nuevaPartidaBoton !== undefined &&
-    nuevaPartidaBoton instanceof HTMLButtonElement
-  ) {
-    nuevaPartidaBoton.disabled = false;
-  }
-};

@@ -19,7 +19,7 @@
       id="cartaActual"
       src="assets/CARDS-back.png"
       alt="Carta actual"
-      width="350"
+      width="250"
     />
     <div id="mensaje" class="message"></div>
     <div class="botones">
@@ -27,6 +27,27 @@
       <button id="mePlanto">Me planto</button>
       <button id="nuevaPartida">Nueva partida</button>
       <button id="oraculo" style="display: none">Oráculo</button>
+    </div>
+    <div class="instrucciones">
+      <h2>INSTRUCCIONES:</h2>
+      <p>
+        Pide la primera carta boca arriba en la baraja. Esta carta será la carta
+        del jugador, decide si deseas tomar otra carta o quedarte con la que
+        tienes. El objetivo del juego es tener una mano que sume 7 y media
+        puntos o lo más cerca posible de este número sin pasarse. Si decides
+        pedir otra carta, añade el valor de esta carta a tu mano y decide si
+        deseas tomar más o plantarte. Puedes tomar tantas cartas como desees,
+        pero si la suma de los valores de las cartas de tu mano supera los 7,5
+        puntos, pierdes automáticamente la partida. Si decides quedarte con la
+        carta que tienes, tu juego termina. Si logras una mano con una
+        puntuación de 7 y media, has ganado el juego, si no, tu objetivo es
+        obtener la mano con la puntuación más cercana a 7 y media.
+        <p>
+        Las cartas numéricas valen su valor nominal, es decir, el As vale 1
+        punto, las cartas del 2 al 7 valen su valor nominal y las figuras (sota,
+        caballo y rey) valen medio punto cada una.
+        </p>
+      </p>
     </div>
     <script src="./src/main.ts"></script>
   </body>
