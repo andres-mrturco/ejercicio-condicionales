@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alice&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ejericio-condicionales</title>
+  </head>
+
+  <body>
+    <h1>Juego de las 7 y 1/2</h1>
+    <h2 id="puntuacion">Puntuación: 0</h2>
+    <img
+      id="cartaActual"
+      src="assets/CARDS-back.png"
+      alt="Carta actual"
+      width="350"
+    />
+    <div id="mensaje" class="message"></div>
+    <div class="botones">
+      <button id="nuevaCarta">Pedir carta</button>
+      <button id="mePlanto">Me planto</button>
+      <button id="nuevaPartida">Nueva partida</button>
+      <button id="oraculo" style="display: none">Oráculo</button>
+    </div>
+    <script src="./src/main.ts"></script>
+  </body>
+</html>
